@@ -122,4 +122,20 @@ public class ProductDAO {  //DB와 연결
 			DBManager.close(conn, pstmt);
 		}
 	}
+	
+	public void deleteProduct(String code) {
+		String sql = "delete product where code=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, code);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+	}
 }
